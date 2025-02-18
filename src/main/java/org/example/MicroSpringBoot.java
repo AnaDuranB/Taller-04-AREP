@@ -1,5 +1,7 @@
 package org.example;
 // ejecutar con: java -cp target/classes org.example.MicroSpringBoot
+
+// java -cp "target/classes;target/dependency/*" org.example.MicroSpringBoot
 import org.example.annotations.GetMapping;
 import org.example.annotations.PostMapping;
 import org.example.annotations.RequestBody;
@@ -25,7 +27,7 @@ public class MicroSpringBoot {
 
         System.out.println("Iniciando MicroSpringBoot...");
         loadControllers();
-        HttpServer.staticfiles("src/main/webapp");
+
         HttpServer.start(35000);
         System.out.println("El servidor está corriendo...");
     }

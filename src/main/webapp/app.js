@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         try {
             // Enviar una solicitud POST para agregar el componente al servidor
-            await fetch("http://localhost:35000/api/components", {
+            await fetch("/api/components", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(component),
@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
      */
     async function fetchComponents() {
         try {
-            const response = await fetch("http://localhost:35000/api/components");
+            const response = await fetch("/api/components");
             const components = await response.json();
 
             componentList.innerHTML = '';

@@ -34,7 +34,6 @@ public class HttpServer {
      * Metodo principal que inicia el servidor, configura rutas y define el puerto.
      */
     public static void main(String[] args) {
-        staticfiles("src/main/webapp");
 
         get("/hello", (req, res) -> "Hello " + req.getValues("name"));
         get("/pi", (req, res) -> String.valueOf(Math.PI));
@@ -219,17 +218,32 @@ public class HttpServer {
     private static void serveStaticFile(String path, OutputStream out) throws IOException {
         if (path.equals("/")) path = "/index.html";
 
+        String dockerEnv = System.getenv("DOCKER_ENV");
+        File file;
+        if (dockerEnv != null && dockerEnv.equals("true")) {
+            file = new File("/usrapp/bin/webapp" + path);
+        } else {
+            file = new File("src/main/webapp" + path);
+        }
+
         // Busca el archivo estático en la carpeta "src/main/webapp"
-        File file = new File("src/main/webapp" + path);
+
         if (file.exists() && !file.isDirectory()) {
-            // Determina el tipo de contenido según la extensión del archivo
             String contentType = getContentType(path);
             byte[] fileBytes = Files.readAllBytes(file.toPath());
-            out.write(("HTTP/1.1 200 OK\r\nContent-Type: " + contentType + "\r\n\r\n").getBytes());
+            out.write(("HTTP/1.1 200 OK\r\n" +
+                    "Content-Type: " + contentType + "\r\n" +
+                    "Access-Control-Allow-Origin: *\r\n" +
+                    "Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS\r\n" +
+                    "Access-Control-Allow-Headers: Content-Type\r\n" +
+                    "\r\n").getBytes());
             out.write(fileBytes);
         } else {
-            // Si el archivo no existe, responde con 404.
-            out.write("HTTP/1.1 404 Not Found\r\n\r\n".getBytes());
+            out.write(("HTTP/1.1 404 Not Found\r\n" +
+                    "Access-Control-Allow-Origin: *\r\n" +
+                    "Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS\r\n" +
+                    "Access-Control-Allow-Headers: Content-Type\r\n" +
+                    "\r\n").getBytes());
         }
     }
 
