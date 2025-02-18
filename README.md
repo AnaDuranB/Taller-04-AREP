@@ -1,5 +1,5 @@
-# AREP Taller 3 💻
-## Arquitecturas de Servidores de Aplicaciones, Meta protocolos de objetos, Patrón IoC, Reflexión
+# AREP Taller 4 💻
+## Modularización con Virtualización e Introducción a Docker
 
 Este proyecto es un framework web ligero desarrollado en Java que permite a los desarrolladores crear aplicaciones web con servicios REST y gestionar archivos estáticos (HTML, CSS, JavaScript, imágenes, etc.). El framework proporciona herramientas para definir rutas REST usando funciones lambda, extraer parámetros de consulta de las solicitudes y especificar la ubicación de archivos estáticos.
 
@@ -221,4 +221,4 @@ curl -X POST http://localhost:35000/api/components -d '{"name": "AMD RYZEN 5 560
 
 ## Authors
 
-- Ana Maria Duran - *AREP* *Taller 2* - [AnaDuranB](https://github.com/AnaDuranB)
+- Ana Maria Duran - *AREP* *Taller 4* - [AnaDuranB](https://github.com/AnaDuranB)
