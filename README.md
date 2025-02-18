@@ -1,7 +1,7 @@
 # AREP Taller 4 💻
 ## Modularización con Virtualización e Introducción a Docker
 
-Este proyecto es un framework web ligero desarrollado en Java que permite a los desarrolladores crear aplicaciones web con servicios REST y gestionar archivos estáticos (HTML, CSS, JavaScript, imágenes, etc.). El framework proporciona herramientas para definir rutas REST usando funciones lambda, extraer parámetros de consulta de las solicitudes y especificar la ubicación de archivos estáticos.
+Este proyecto es un framework web ligero desarrollado en Java que permite a los desarrolladores crear aplicaciones web con servicios REST y gestionar archivos estáticos (HTML, CSS, JavaScript, imágenes, etc.). El framework proporciona herramientas para definir rutas REST usando funciones lambda, extraer parámetros de consulta de las solicitudes y especificar la ubicación de archivos estáticos. Además, se ha mejorado para manejar solicitudes concurrentes y asegurar un cierre elegante del servidor.
 
 En la aplicación web podrás añadir los componentes que quieres y te hacen falta para armar tu computador deseado. 😎
 
@@ -46,8 +46,35 @@ En la aplicación web podrás añadir los componentes que quieres y te hacen fal
         ```java
         staticfiles("src/main/webapp");
         ```
-        
-4. **Escalabilidad y Mantenibilidad**:
+4. **Concurrencia**:
+    - El servidor ahora maneja solicitudes concurrentes utilizando un `ExecutorService` con un pool de hilos.
+    - Esto permite que el servidor atienda múltiples solicitudes simultáneamente sin bloquearse.
+    - Ejemplo:
+
+        ```java
+        private static final int THREADS = 10;
+        private static ExecutorService threadPool = Executors.newFixedThreadPool(THREADS);
+        ```
+
+5. **Cierre Elegante**:
+    - El servidor puede detenerse de manera segura, cerrando todos los hilos en ejecución y liberando recursos.
+    - Ejemplo:
+
+        ```java
+        public static void stop() {
+            running = false;
+            threadPool.shutdown();
+            try {
+                if (!threadPool.awaitTermination(60, TimeUnit.SECONDS)) {
+                    threadPool.shutdownNow();
+                }
+            } catch (InterruptedException e) {
+                threadPool.shutdownNow();
+            }
+            System.out.println("Servidor detenido correctamente.");
+        }
+        ```
+6. **Escalabilidad y Mantenibilidad**:
     - Diseñado para ser ligero y fácil de extender.
     - Ideal para aplicaciones pequeñas y medianas que requieren un servidor HTTP personalizado.
 
@@ -74,13 +101,13 @@ Sigue estos pasos para obtener un entorno de desarrollo funcional:
 1. Clona este repositorio:
 
 ```
-git clone https://github.com/AnaDuranB/Taller-02-AREP.git
+git clone https://github.com/AnaDuranB/Taller-04-AREP.git
 ```
 
 2. Ingresa al directorio del proyecto:
 
 ```
-cd Taller-02-AREP
+cd Taller-04-AREP
 ```
 
 En caso de no contar con un IDE de java que se haga responsable de la compilación y ejecución:
@@ -94,9 +121,9 @@ mvn clean compile
 4. Ejecuta el servidor:
 
 ```
-java -cp target/classes org.example.server.HttpServer
+java -cp target/classes org.example.MicroSpringBoot
 ```
-![image](https://github.com/user-attachments/assets/02b8ce14-9c4b-4485-8a76-f2642c1916df)
+![img_1.png](img_1.png)
 
 
 5. Abre tu navegador y accede a:
@@ -115,11 +142,23 @@ src/
     java/
       org/
         example/
-          HttpServer.java       # Clase principal del servidor
-          Request.java          # Maneja las solicitudes HTTP
-          Response.java         # Maneja las respuestas HTTP
-          Component.java        # Modelo de datos para componentes
-    webroot/                    # Carpeta de archivos estáticos             
+            annotations/               # Anotaciones personalizadas
+                GetMapping.java
+                PostMappingjava
+                RequestBody.java
+                Requestparamjava
+                RestControllerjava
+            controller/
+                ComponentController.java   # Controlador para manejar componentes
+                GreetingController.java    # Controlador de ejemplo
+            model/
+                Component.java        # Modelo de datos para componentes
+            server/
+                HttpServer.java       # Clase principal del servidor
+                Request.java          # Maneja las solicitudes HTTP
+                Response.java         # Maneja las respuestas HTTP
+          MicroSpringBoot.java        # Clase principal del framework IoC
+    webapp/                    # Carpeta de archivos estáticos             
         index.html              # Archivo HTML
         styles.css              # Archivo CSS
         script.js               # Archivo JavaScript
@@ -164,8 +203,6 @@ public static void main(String[] args) {
 
 - **GET `/hello?name=Pedro`**:
     - Respuesta: `Hello Pedro`
-- **GET `/pi`**:
-    - Respuesta: `3.141592653589793`
 - **GET `/api/components`**:
     - Respuesta: `[{"name": "AMD RYZEN 5 5600X", "type": "CPU", "price": 769999}]`
 - **POST `/api/components`** (con cuerpo JSON):
@@ -201,8 +238,8 @@ Para ejecutar las pruebas automatizadas:
 ```
 mvn test
 ```
-![image](https://github.com/user-attachments/assets/dee2326f-4be9-43f5-a6f4-f4fd40ecd294)
-
+![img_2.png](img_2.png)
+![img_3.png](img_3.png)
 Estas pruebas verifican la correcta respuesta del servidor ante diferentes solicitudes.
 
 
@@ -210,7 +247,6 @@ Ejemplo con `curl`:
 
 ```bash
 curl http://localhost:35000/hello?name=Ana
-curl http://localhost:35000/pi
 curl -X POST http://localhost:35000/api/components -d '{"name": "AMD RYZEN 5 5600X", "type": "CPU", "price": 769999}'
 ```
 
