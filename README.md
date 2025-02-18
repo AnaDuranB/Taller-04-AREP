@@ -123,7 +123,7 @@ mvn clean compile
 ```
 java -cp target/classes org.example.MicroSpringBoot
 ```
-![img_1.png](img_1.png)
+![img_1.png](imgss/img_1.png)
 
 
 5. Abre tu navegador y accede a:
@@ -238,8 +238,8 @@ Para ejecutar las pruebas automatizadas:
 ```
 mvn test
 ```
-![img_2.png](img_2.png)
-![img_3.png](img_3.png)
+![img_2.png](imgss/img_2.png)
+![img_3.png](imgss/img_3.png)
 Estas pruebas verifican la correcta respuesta del servidor ante diferentes solicitudes.
 
 
