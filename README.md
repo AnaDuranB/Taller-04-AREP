@@ -32,7 +32,7 @@ App:
 ![img_4.png](imgss/docker_ss/img_4.png)
 
 Docker:
-
+![img.png](imgss/docker_ss/img_cmd.png)
 ![img.png](imgss/docker_ss/img.png)
 ![img_1.png](imgss/docker_ss/img_1.png)
 ---
