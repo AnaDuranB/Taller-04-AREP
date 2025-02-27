@@ -78,6 +78,7 @@ src/
         script.js               # Archivo JavaScript
   test/
     java/                       # Pruebas unitarias
+Dockerfile                      # Archivo Docker
 pom.xml                         # Archivo de configuración de Maven
 README.md                       # Documentación del proyecto
 ```
