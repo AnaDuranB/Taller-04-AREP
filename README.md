@@ -29,7 +29,7 @@ En caso de no tener maven instalado, aquí encuentras un tutorial [Maven](https:
 
 El proyecto sigue una arquitectura cliente-servidor con un backend en Java y un frontend en HTML, CSS y JavaScript.
 
-Componentes principales de tu arquitectura:
+Componentes principales de la arquitectura:
 
 1. **Servidor web en Java (MicroSpringBoot)**
     - Maneja las solicitudes HTTP.
