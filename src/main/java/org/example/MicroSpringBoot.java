@@ -96,4 +96,5 @@ public class MicroSpringBoot {
             return "{\"error\": \"Internal Server Error\"}";
         }
     }
+
 }
