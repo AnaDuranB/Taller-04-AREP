@@ -6,9 +6,10 @@ Este proyecto es un framework web ligero desarrollado en Java que permite a los 
 En la aplicación web podrás añadir los componentes que quieres y te hacen falta para armar tu computador deseado. 😎
 
 
-## Demo del Proyecto
+## Deploy Video
 
-<video src="https://github.com/AnaDuranB/Taller-04-AREP/imgss/taller-04-arep.mp4" controls width="100%"></video>
+https://github.com/user-attachments/assets/29175d76-1523-4f0d-ab99-3b0718b0185b
+
 
 ---
 ## Prerequisites ⚙️
@@ -283,13 +284,6 @@ mvn test
 
 Estas pruebas verifican la correcta respuesta del servidor ante diferentes solicitudes.
 
-
-Ejemplo con `curl`:
-
-```bash
-curl http://localhost:35000/hello?name=Ana
-curl -X POST http://localhost:35000/api/components -d '{"name": "AMD RYZEN 5 5600X", "type": "CPU", "price": 769999}'
-```
 
 ## Built With
 
