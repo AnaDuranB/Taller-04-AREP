@@ -87,19 +87,15 @@ README.md                       # Documentación del proyecto
 
 Clase principal que inicia el servidor, escucha las solicitudes y las distribuye a los controladores correspondientes.
 
-#### 2. **Manejador de Solicitudes (`RequestHandler.java`)**
+#### 2. **Manejador de Solicitudes (`Request.java`)**
 
 Encargado de analizar las solicitudes HTTP y responder apropiadamente según la ruta.
 
-#### 3. **Manejo de Archivos Estáticos (`StaticFileHandler.java`)**
-
-Sirve archivos HTML, CSS, JS e imágenes desde el directorio configurado.
-
-#### 4. **Gestión de Componentes (`ComponentController.java`)**
+#### 3. **Gestión de Componentes (`ComponentController.java`)**
 
 Implementa la API REST para agregar y listar componentes de computadoras en memoria.
 
-#### 5. **Modelo de Datos (`Component.java`)**
+#### 4. **Modelo de Datos (`Component.java`)**
 
 Representa los datos de un componente (nombre, tipo y precio) y se almacena temporalmente en una lista en memoria.
 
